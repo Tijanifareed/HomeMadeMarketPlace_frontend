@@ -1,6 +1,5 @@
-import React from 'react'
-import PhoneCart from '../assets/PhoneCart.svg'
-import { useState } from 'react';
+import React, { useState } from 'react';
+import PhoneCart from '../assets/PhoneCart.svg';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -14,7 +13,6 @@ const LoginPage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // 'Authorization': `Bearer ${sessionStorage.getItem('token') || ''}`, // Add token if available
         },
         body: JSON.stringify({
           username,
@@ -25,12 +23,12 @@ const LoginPage = () => {
       const responseData = await response.json();
 
       if (response.ok) {
-        sessionStorage.setItem('token', responseData.token); 
-        console.log(responseData.data['userName'])
-        sessionStorage.setItem('username', responseData.data['userName'])
+        // Use localStorage to allow access across tabs
+        localStorage.setItem('token', responseData.data['token']); 
+        localStorage.setItem('username', responseData.data['userName']);
+        
         alert('Login Successful');
-        console.log(responseData.data);
-        window.location.href = '/'     ; // Redirect to the booking page
+        window.location.href = '/'; // Redirect to the booking page
       } else {
         alert('Error: ' + responseData.data); // Show error message if login fails
       }
@@ -84,4 +82,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage
+export default LoginPage;
