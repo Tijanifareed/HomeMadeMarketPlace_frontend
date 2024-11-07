@@ -67,15 +67,17 @@ const UserProfile = () => {
       <Navbar />
       <div className='mt-[140px] justify-items-center'>
         <div className='border-solid w-[380px] h-[430px] bg-gradient-to-t from-blue-500 to-transparent rounded-2xl'>
-          <p className='ml-40 mr-36 text-2xl'>Profile</p>
+          <p className='ml-40 mr-36 text-2xl underline'>Profile</p>
           <div>
-            <img src={profileData.profilePicture} alt="Profile picture" className="rounded-full h-32 w-32 object-cover" />
-            <p><strong>Username: </strong> {profileData.userName}</p>
-            <p><strong>Phone number:</strong> {profileData.phoneNumber}</p>
-            <p><strong>E-mail: </strong> {profileData.email}</p>
-            <p><strong>Address: </strong> {profileData.address}</p>
-            <p><strong>Role: </strong> {profileData.role}</p>
-            <p><strong>Bio: </strong> {profileData.bio}</p>
+            <img src={profileData.profilePicture} alt="Profile picture" className="rounded-full h-40 w-40 object-cover ml-[110px]" />
+            <div className='mt-[20px] ml-[30px]'>
+            <p className='text-white text-[20px]'><strong>Username: </strong> {profileData.userName}</p>
+            <p className='text-white text-[20px]'><strong>Phone number:</strong> {profileData.phoneNumber}</p>
+            <p className='text-white text-[20px]'><strong>E-mail: </strong> {profileData.email}</p>
+            <p className='text-white text-[20px]'><strong>Address: </strong> {profileData.address}</p>
+            <p className='text-white text-[20px]'><strong>Role: </strong> {profileData.role}</p>
+            <p className='text-white text-[20px]'><strong>Bio: </strong> {profileData.bio}</p>
+            </div>      
           </div>
         </div>
       </div>
