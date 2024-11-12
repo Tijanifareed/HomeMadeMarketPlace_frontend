@@ -4,6 +4,8 @@ import Home from "../pages/Home"
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
 import UserProfile from "../pages/UserProfile";
+import SellerApplication from "../pages/SellerApplication";
+import LandingPage from "../pages/LandingPage";
 
 const router = createBrowserRouter([
      {
@@ -12,6 +14,10 @@ const router = createBrowserRouter([
           children: [
                {
                     path: "",
+                    element: <LandingPage/>  // default route if no other path is matched. Here, it's set to Home component.
+               },
+               {
+                    path: "/home",
                     element: <Home/>
                },
                {
@@ -25,6 +31,10 @@ const router = createBrowserRouter([
                {
                     path: "profile",
                     element: <UserProfile/>
+               },
+               {
+                    path:"Apply-Today",
+                    element: <SellerApplication/>
                }
      ]
      }
