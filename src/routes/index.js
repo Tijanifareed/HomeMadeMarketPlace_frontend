@@ -6,6 +6,7 @@ import SignUpPage from "../pages/SignUpPage";
 import UserProfile from "../pages/UserProfile";
 import SellerApplication from "../pages/SellerApplication";
 import LandingPage from "../pages/LandingPage";
+import Adminloginpage from "../pages/adminpages/adminloginpage";
 
 const router = createBrowserRouter([
      {
@@ -35,7 +36,11 @@ const router = createBrowserRouter([
                {
                     path:"Apply-Today",
                     element: <SellerApplication/>
-               }
+               },
+               {
+                    path: "adminloginpage",
+                    element: <Adminloginpage/>
+               },
      ]
      }
 ]);

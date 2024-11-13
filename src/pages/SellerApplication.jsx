@@ -109,11 +109,16 @@ const SellerApplication = () => {
               value={bvn}
               onChange={(e) => setBvn(e.target.value)}
             />
+                <p className='text-left  text-gray-800 '>Id card</p>
             <input
               className="w-full text-gray-800 placeholder-gray-500 p-2 border-b-2 border-gray-300 focus:border-blue-600 focus:outline-none mb-6"
               type="file"
+              placeholder='Idcard'
               onChange={(e) => setIdCard(e.target.files[0])} // Use files[0] for file input
             />
+
+
+            <p className='text-left  text-gray-800 '>Portfolio</p>
             <input
               className="w-full text-gray-800 placeholder-gray-500 p-2 border-b-2 border-gray-300 focus:border-blue-600 focus:outline-none mb-6"
               type="file"
