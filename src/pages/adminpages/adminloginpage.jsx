@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Admin from '../Admin.svg'
 
 const Adminloginpage = () => {
-  const [username, setUsername] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false); // Loading state
 
@@ -11,13 +11,13 @@ const Adminloginpage = () => {
     setLoading(true); // Start loading
 
     try {
-      const response = await fetch("http://localhost:8080/loginPage", {
+      const response = await fetch("http://localhost:8080/loginByAdmin", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username,
+          userName,
           password,
         }),
       });
@@ -26,7 +26,7 @@ const Adminloginpage = () => {
       setLoading(false); // Stop loading after receiving the response
 
       if (response.ok) {
-        localStorage.setItem('token', responseData.data['token']);
+        // localStorage.setItem('token', responseData.data['token']);
         alert('Login Successful');
         window.location.href = '/home'; // Redirect to the home page
       } else {
@@ -61,8 +61,8 @@ const Adminloginpage = () => {
             className="w-full text-gray-800 placeholder-gray-500 p-2 border-b-2 border-gray-300 focus:border-blue-600 focus:outline-none mb-4"
             type="text"
             placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
           />
           <input
             className="w-full text-gray-800 placeholder-gray-500 p-2 border-b-2 border-gray-300 focus:border-blue-600 focus:outline-none mb-6"
