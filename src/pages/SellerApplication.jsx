@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PhoneCart from '../assets/PhoneCart.svg';
+import { Link } from 'react-router-dom';
+
 import {jwtDecode} from 'jwt-decode';
 
 
@@ -67,10 +69,24 @@ const SellerApplication = () => {
 
   if (isSubmitted) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen flex-col">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 text-center">
           {successMessage}
+          
+         
         </h1>
+        <Link to="/home">
+        <button
+              // type="submit"
+              className="w-24 bg-blue-600 text-white py-3 rounded-md mt-4 hover:bg-blue-700 transition duration-200"
+              
+            >
+
+
+              Home
+            </button>
+            </Link>
+
       </div>
     );
   }
