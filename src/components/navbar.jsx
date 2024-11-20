@@ -52,7 +52,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="fixed shadow-md top-12 w-full bg-white z-50">
+    <header className="fixed shadow-md top-12 w-full bg-transparent z-50">
       <nav className="flex flex-wrap items-center justify-between p-3 md:flex-nowrap">
         {/* Logo */}
         <div className="text-xl font-bold text-center md:text-left">RealMart</div>
@@ -61,7 +61,7 @@ const Navbar = () => {
         <div className="flex items-center mt-3 md:mt-0 w-full md:w-auto">
           <form className="relative flex w-full md:w-64">
             <input
-              className="w-full p-2 bg-gray-200 text-black placeholder-gray-500 rounded-3xl pl-9"
+              className="w-full p-2 bg-transparent text-black placeholder-gray-500 rounded-3xl pl-9"
               type="text"
               placeholder="Search products..."
             />
@@ -77,7 +77,7 @@ const Navbar = () => {
           <div className="flex items-center gap-2">
             <TbUserCheck className="hidden md:block" />
             <select
-              className="bg-white  text-gray-900  outline-none text-sm"
+              className="bg-transparent  text-gray-900  outline-none text-sm"
               id="user"
               name="user"
               value={user}
@@ -97,7 +97,7 @@ const Navbar = () => {
           <div className="flex items-center gap-2">
             <GoQuestion className="hidden md:block" />
             <select
-              className="bg-white text-gray-900 outline-none text-sm"
+              className="bg-transparent text-gray-900 outline-none text-sm"
               id="help"
               name="help"
               value={help}

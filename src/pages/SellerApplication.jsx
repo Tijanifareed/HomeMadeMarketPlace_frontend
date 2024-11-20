@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PhoneCart from '../assets/PhoneCart.svg';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {jwtDecode} from 'jwt-decode';
 
@@ -13,6 +14,7 @@ const SellerApplication = () => {
   const [successMessage, setSuccessMessage] = useState(''); // To hold the success message
   const [isSubmitted, setIsSubmitted] = useState(false); // New state variable
 
+  const navigate = useNavigate();
 
 
   const getUserIdFromToken = () => {
@@ -51,6 +53,11 @@ const SellerApplication = () => {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
+      }).then(response => {
+        if (response.status === 401) {
+          alert('Session expired. Please log in again.');
+          navigate('/login');
+        }
       });
 
       if (response.ok) {

@@ -8,6 +8,7 @@ import SellerApplication from "../pages/SellerApplication";
 import LandingPage from "../pages/LandingPage";
 import Adminloginpage from "../pages/adminpages/adminloginpage";
 import AdmincreateAccount from "../pages/adminpages/admincreateAccount";
+import AdminDashboard from "../pages/adminpages/admindashboard";
 
 const router = createBrowserRouter([
      {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
                {
                     path: "adminsignuppage",
                     element: <AdmincreateAccount/>  // This route is for admin signup only.
+               },
+               {
+                    path: "admin-dashboard",
+                    element: <AdminDashboard/>
                }
      ]
      }

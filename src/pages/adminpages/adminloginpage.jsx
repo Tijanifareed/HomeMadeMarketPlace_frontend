@@ -28,7 +28,7 @@ const Adminloginpage = () => {
       if (response.ok) {
         // localStorage.setItem('token', responseData.data['token']);
         alert('Login Successful');
-        window.location.href = '/home'; // Redirect to the home page
+        window.location.href = '/admin-dashboard'; // Redirect to the home page
       } else {
         alert('Error: ' + responseData.data); // Show error message if login fails
       }

@@ -3,6 +3,8 @@ import Navbar from '../components/navbar';
 import { jwtDecode } from 'jwt-decode';
 import { CiEdit } from "react-icons/ci";
 import { FaUser } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+
 
 const UserProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -14,6 +16,9 @@ const UserProfile = () => {
     role: '',
     bio: '',
   });
+
+  const navigate = useNavigate();
+
 
   const getUserIdFromToken = () => {
     const token = localStorage.getItem('token');
@@ -49,6 +54,11 @@ const UserProfile = () => {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
+      }).then(response => {
+        if (response.status === 401) {
+          alert('Session expired. Please log in again.');
+          navigate('/login');
+        }
       });
 
       if (!response.ok) {
@@ -78,7 +88,12 @@ const UserProfile = () => {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           },
           body: JSON.stringify({ userId }),
-        });
+        })
+          if (response.status === 401) {
+            alert('Session expired. Please log in again.');
+            navigate('/login');
+          }
+        
 
         if (!response.ok) {
           throw new Error('Failed to fetch profile data');
