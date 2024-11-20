@@ -5,7 +5,6 @@ import { CiEdit } from "react-icons/ci";
 import { FaUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
-
 const UserProfile = () => {
   const [profileData, setProfileData] = useState({
     profilePicture: '',
@@ -18,7 +17,6 @@ const UserProfile = () => {
   });
 
   const navigate = useNavigate();
-
 
   const getUserIdFromToken = () => {
     const token = localStorage.getItem('token');
@@ -54,12 +52,13 @@ const UserProfile = () => {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
-      }).then(response => {
-        if (response.status === 401) {
-          alert('Session expired. Please log in again.');
-          navigate('/login');
-        }
       });
+
+      if (response.status === 401) {
+        alert('Session expired. Please log in again.');
+        navigate('/login');
+        return;
+      }
 
       if (!response.ok) {
         throw new Error('Failed to upload profile picture');
@@ -88,12 +87,13 @@ const UserProfile = () => {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           },
           body: JSON.stringify({ userId }),
-        })
-          if (response.status === 401) {
-            alert('Session expired. Please log in again.');
-            navigate('/login');
-          }
-        
+        });
+
+        if (response.status === 401) {
+          alert('Session expired. Please log in again.');
+          navigate('/login');
+          return;
+        }
 
         if (!response.ok) {
           throw new Error('Failed to fetch profile data');
@@ -116,21 +116,20 @@ const UserProfile = () => {
   return (
     <div>
       <Navbar />
-      <div className='mt-[140px] justify-items-center'>
-        <div className='border-solid w-[380px] h-[430px] bg-gradient-to-t from-blue-500 to-transparent rounded-2xl'>
-          <p className='ml-40 mr-36 text-2xl underline'>Profile</p>
-          <div>
-            <div className='flex items-center '>
+      <div className="flex justify-center items-center min-h-screen bg-gray-100 pt-24">
+        <div className="bg-white shadow-lg rounded-lg w-full max-w-md p-6">
+          <div className="text-center mb-6">
+            <div className="relative inline-block">
               <img
-                src={profileData.profilePicture || <FaUser />}
+                src={profileData.profilePicture || ''}
                 alt="Profile"
-                className="rounded-full h-40 w-40 object-cover ml-[110px] hover:scale-110"
+                className="w-28 h-28 rounded-full object-cover border-4 border-blue-500 shadow-lg"
               />
               <button
                 onClick={handleEditProfilePicture}
-                className='cursor-pointer hover:opacity-75'
+                className="absolute bottom-0 right-0 bg-blue-500 text-white p-1 rounded-full shadow hover:scale-110"
               >
-                <CiEdit className='mt-[150px] text-2xl mr-[60px]' />
+                <CiEdit className="text-xl" />
               </button>
               <input
                 id="profilePictureInput"
@@ -140,13 +139,25 @@ const UserProfile = () => {
                 onChange={handleProfilePictureChange}
               />
             </div>
-            <div className='mt-[20px] ml-[30px]'>
-              <p className='text-white text-[20px]'><strong>Username: </strong> {profileData.userName}</p>
-              <p className='text-white text-[20px]'><strong>Phone number:</strong> {profileData.phoneNumber}</p>
-              <p className='text-white text-[20px]'><strong>E-mail: </strong> {profileData.email}</p>
-              <p className='text-white text-[20px]'><strong>Address: </strong> {profileData.address}</p>
-              <p className='text-white text-[20px]'><strong>Role: </strong> {profileData.role}</p>
-              <p className='text-white text-[20px]'><strong>Bio: </strong> {profileData.bio}</p>
+            <h1 className="text-xl font-semibold text-gray-800 mt-4">{profileData.userName || "User Name"}</h1>
+            <p className="text-gray-500 text-sm">{profileData.email || "Email not provided"}</p>
+          </div>
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-gray-700">Phone:</span>
+              <span>{profileData.phoneNumber || "Not provided"}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-gray-700">Address:</span>
+              <span>{profileData.address || "Not provided"}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-gray-700">Role:</span>
+              <span className="capitalize">{profileData.role || "Unknown"}</span>
+            </div>
+            <div>
+              <span className="font-semibold text-gray-700">Bio:</span>
+              <p className="text-gray-600 text-sm">{profileData.bio || "No bio available"}</p>
             </div>
           </div>
         </div>

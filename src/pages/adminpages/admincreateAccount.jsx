@@ -27,7 +27,7 @@ const AdmincreateAccount = () => {
          if (response.ok) {
            alert('Sign-Up Successful');
         //    sessionStorage.setItem('token', responseData.token); 
-           window.location.href = '/adminloginpage'; // Redirect to the homepage
+           window.location.href = '/login'; // Redirect to the homepage
          } else {
              console.error(responseData);
            alert('Error: ' + responseData.data);

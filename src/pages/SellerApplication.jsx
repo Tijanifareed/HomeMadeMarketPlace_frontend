@@ -2,20 +2,17 @@ import React, { useState } from 'react';
 import PhoneCart from '../assets/PhoneCart.svg';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
-import {jwtDecode} from 'jwt-decode';
-
+import { jwtDecode } from 'jwt-decode';
 
 const SellerApplication = () => {
   const [nin, setNin] = useState('');
   const [bvn, setBvn] = useState('');
   const [idCard, setIdCard] = useState(null);
   const [portfolio, setPortfolio] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(''); // To hold the success message
-  const [isSubmitted, setIsSubmitted] = useState(false); // New state variable
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const navigate = useNavigate();
-
 
   const getUserIdFromToken = () => {
     const token = localStorage.getItem('token');
@@ -23,7 +20,7 @@ const SellerApplication = () => {
 
     try {
       const decoded = jwtDecode(token);
-      return decoded.userId; // Ensure userId is present in your JWT payload
+      return decoded.userId;
     } catch (error) {
       console.error('Invalid token:', error);
       return null;
@@ -53,19 +50,15 @@ const SellerApplication = () => {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-      }).then(response => {
-        if (response.status === 401) {
-          alert('Session expired. Please log in again.');
-          navigate('/login');
-        }
       });
 
-      if (response.ok) {
+      if (response.status === 401) {
+        alert('Session expired. Please log in again.');
+        navigate('/login');
+      } else if (response.ok) {
         const data = await response.json();
-        console.log('Application submitted successfully!');
         setSuccessMessage(data.data.message);
-        setIsSubmitted(true); // Set submission status to true
-        // alert(data.data.message);
+        setIsSubmitted(true);
       } else {
         console.error('Error submitting application');
       }
@@ -77,85 +70,98 @@ const SellerApplication = () => {
   if (isSubmitted) {
     return (
       <div className="flex items-center justify-center h-screen flex-col">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 text-center">
-          {successMessage}
-          
-         
+        <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">
+          🎉 {successMessage}
         </h1>
         <Link to="/home">
-        <button
-              // type="submit"
-              className="w-24 bg-blue-600 text-white py-3 rounded-md mt-4 hover:bg-blue-700 transition duration-200"
-              
-            >
-
-
-              Home
-            </button>
-            </Link>
-
+          <button className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
+            Back to Home
+          </button>
+        </Link>
       </div>
     );
   }
 
   return (
-    <div>
-      {/* <Navbar /> */}
-      <div className="mt-[35px] flex items-center gap-8">
-        <img
-          className="w-[100%] sm:w-[400px] sm:h-[330px] md:w-[490px] md:h-[401px] lg:w-[600px] lg:h-[500px] object-cover"
-          src={PhoneCart}
-          alt="Description"
-          style={{ flexShrink: 0 }}
-        />
+    <div className="flex flex-col sm:flex-row items-center justify-center min-h-screen p-6 bg-gray-100">
+      <img
+        className="w-full sm:w-1/2 lg:w-1/3 object-cover mb-6 sm:mb-0"
+        src={PhoneCart}
+        alt="Illustration"
+      />
 
-        <div className="flex flex-col items-center text-center max-w-[400px] w-full mx-auto pr-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
-            Just Few Information to get you started
-          </h1>
-          <p className="text-gray-600 text-sm md:text-base mb-6">
-            Please enter your details below...
-          </p>
-
-          <form className="w-full" onSubmit={handleSubmit}>
+      <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-8">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          Seller Application
+        </h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              NIN
+            </label>
             <input
-              className="w-full text-gray-800 placeholder-gray-500 p-2 border-b-2 border-gray-300 focus:border-blue-600 focus:outline-none mb-4"
               type="text"
-              placeholder="NIN"
               value={nin}
               onChange={(e) => setNin(e.target.value)}
+              className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-600 focus:outline-none"
+              placeholder="Enter your NIN"
+              required
             />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              BVN
+            </label>
             <input
-              className="w-full text-gray-800 placeholder-gray-500 p-2 border-b-2 border-gray-300 focus:border-blue-600 focus:outline-none mb-6"
               type="text"
-              placeholder="BVN"
               value={bvn}
               onChange={(e) => setBvn(e.target.value)}
+              className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-600 focus:outline-none"
+              placeholder="Enter your BVN"
+              required
             />
-                <p className='text-left  text-gray-800 '>Id card</p>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              ID Card
+            </label>
             <input
-              className="w-full text-gray-800 placeholder-gray-500 p-2 border-b-2 border-gray-300 focus:border-blue-600 focus:outline-none mb-6"
               type="file"
-              placeholder='Idcard'
-              onChange={(e) => setIdCard(e.target.files[0])} // Use files[0] for file input
+              onChange={(e) => setIdCard(e.target.files[0])}
+              className="w-full text-gray-500"
             />
+            {idCard && (
+              <p className="mt-2 text-sm text-gray-500">
+                Selected File: {idCard.name}
+              </p>
+            )}
+          </div>
 
-
-            <p className='text-left  text-gray-800 '>Portfolio</p>
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700">
+              Portfolio
+            </label>
             <input
-              className="w-full text-gray-800 placeholder-gray-500 p-2 border-b-2 border-gray-300 focus:border-blue-600 focus:outline-none mb-6"
               type="file"
-              onChange={(e) => setPortfolio(e.target.files[0])} // Use files[0] for file input
+              onChange={(e) => setPortfolio(e.target.files[0])}
+              className="w-full text-gray-500"
             />
+            {portfolio && (
+              <p className="mt-2 text-sm text-gray-500">
+                Selected File: {portfolio.name}
+              </p>
+            )}
+          </div>
 
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-3 rounded-md mt-4 hover:bg-blue-700 transition duration-200"
-            >
-              Apply
-            </button>
-          </form>
-        </div>
+          <button
+            type="submit"
+            className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
+          >
+            Submit Application
+          </button>
+        </form>
       </div>
     </div>
   );
