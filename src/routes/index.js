@@ -8,6 +8,7 @@ import SellerApplication from "../pages/SellerApplication";
 import LandingPage from "../pages/LandingPage";
 import AdmincreateAccount from "../pages/adminpages/admincreateAccount";
 import AdminDashboard from "../pages/adminpages/admindashboard";
+import AdminSellerApplications from "../pages/adminpages/SellerApplicants"
 
 const router = createBrowserRouter([
      {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
                {
                     path: "admin-dashboard",
                     element: <AdminDashboard/>
+               },
+               {
+                    path: "admin/applications",
+                    element: <AdminSellerApplications/>
                }
      ]
      }

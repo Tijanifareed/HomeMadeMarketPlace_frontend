@@ -9,14 +9,14 @@ const Sidebar = () => {
       <nav className="mt-4">
         <ul className="space-y-4">
           <li>
-            <Link to="/admin/users" className="block px-4 py-2 hover:bg-gray-700 rounded">
+            <a href="/admin/users" className="block px-4 py-2 hover:bg-gray-700 rounded">
               User Management
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="/admin/applications" className="block px-4 py-2 hover:bg-gray-700 rounded">
+            <a href="/admin/applications" className="block px-4 py-2 hover:bg-gray-700 rounded">
               Seller Applications
-            </Link>
+            </a>
           </li>
           <li>
             <Link to="/admin/analytics" className="block px-4 py-2 hover:bg-gray-700 rounded">
