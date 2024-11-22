@@ -8,7 +8,7 @@ import SellerApplication from "../pages/SellerApplication";
 import LandingPage from "../pages/LandingPage";
 import AdmincreateAccount from "../pages/adminpages/admincreateAccount";
 import AdminDashboard from "../pages/adminpages/admindashboard";
-import AdminSellerApplications from "../pages/adminpages/SellerApplicants"
+import SellerApplicants from "../pages/adminpages/SellerApplicants"
 
 const router = createBrowserRouter([
      {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
           children: [
                {
                     path: "",
-                    element: <LandingPage/>  // default route if no other path is matched. Here, it's set to Home component.
+                    element: <LandingPage/>
                },
                {
                     path: "/home",
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
                },
                {
                     path: "admin/applications",
-                    element: <AdminSellerApplications/>
+                    element: <SellerApplicants/>
                }
      ]
      }
