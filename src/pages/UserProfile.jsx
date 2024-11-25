@@ -6,6 +6,7 @@ import { FaUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [profileData, setProfileData] = useState({
     profilePicture: '',
     userName: '',
@@ -46,7 +47,7 @@ const UserProfile = () => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8080/upload-picture', {
+      const response = await fetch(`${API_URL}/upload-picture`, {
         method: 'POST',
         body: formData,
         headers: {
@@ -80,7 +81,7 @@ const UserProfile = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:8080/profile", {
+        const response = await fetch(`${API_URL}/profile`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

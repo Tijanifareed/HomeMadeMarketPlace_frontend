@@ -3,6 +3,7 @@ import Admin from '../Admin.svg'
 
 
 const AdmincreateAccount = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
      const [userName, setUserName] = useState('');
      const [password, setPassword] = useState('');
    
@@ -10,7 +11,7 @@ const AdmincreateAccount = () => {
        e.preventDefault();
    
        try {
-         const response = await fetch("http://localhost:8080/create_adminAccount", {
+         const response = await fetch(`${API_URL}/create_adminAccount`, {
            method: 'POST',
            headers: {
              'Content-Type': 'application/json',

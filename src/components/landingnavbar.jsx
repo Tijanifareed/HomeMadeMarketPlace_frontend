@@ -6,6 +6,7 @@ import { GiShoppingCart } from "react-icons/gi";
 import { useNavigate } from 'react-router-dom';
 
 const Landingnavbar = () => {
+  
   const [Help, setHelp] = useState('');
   const [User, setUser] = useState('');
   

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 const SellerApplication = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [nin, setNin] = useState('');
   const [bvn, setBvn] = useState('');
   const [idCard, setIdCard] = useState(null);
@@ -44,7 +45,7 @@ const SellerApplication = () => {
     formData.append('portfolio', portfolio);
 
     try {
-      const response = await fetch('http://localhost:8080/sellerApplication', {
+      const response = await fetch(`${API_URL}/sellerApplication`, {
         method: 'POST',
         body: formData,
         headers: {
@@ -61,9 +62,13 @@ const SellerApplication = () => {
         setIsSubmitted(true);
       } else {
         console.error('Error submitting application');
+        const data = await response.json();
+        setSuccessMessage(data.data);
+        setIsSubmitted(true);
       }
     } catch (error) {
       console.error('Error:', error);
+
     }
   };
 

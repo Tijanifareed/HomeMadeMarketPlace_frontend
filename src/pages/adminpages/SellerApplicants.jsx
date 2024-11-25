@@ -3,6 +3,7 @@ import {jwtDecode} from 'jwt-decode'; // Correct import
 import { useNavigate } from 'react-router-dom';
 
 const SellerApplicants = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [applications, setApplications] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const SellerApplicants = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/getAllPendingSellers', {
+      const response = await fetch(`${API_URL}/getAllPendingSellers`, {
         method: 'POST',
         body: JSON.stringify({ adminId }),
         headers: {

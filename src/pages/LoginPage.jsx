@@ -1,64 +1,62 @@
-
 import React, { useState } from 'react';
 import PhoneCart from '../assets/PhoneCart.svg';
 
 const LoginPage = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Start loading
+    setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8080/loginPage", {
+      const response = await fetch(`${API_URL}/loginPage`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
+        body: JSON.stringify({ username, password }),
       });
 
       const responseData = await response.json();
-      setLoading(false); // Stop loading after receiving the response
+      setLoading(false);
 
       if (response.ok) {
         localStorage.setItem('token', responseData.data['token']);
         alert('Login Successful');
-        if(responseData.data['role'] == "ADMIN"){
-          window.location.href = '/admin-dashboard'; // Redirect to the admin home page
-        }else{
-          window.location.href = '/home'; 
+        if (responseData.data['role'] === 'ADMIN') {
+          window.location.href = '/admin-dashboard';
+        } else {
+          window.location.href = '/home';
         }
-        // Redirect to the home page
       } else {
-        alert('Error: ' + responseData.data); // Show error message if login fails
+        alert('Error: ' + responseData.data);
       }
     } catch (error) {
       console.error('Error:', error);
-      setLoading(false); // Stop loading on error
-      alert('An error occurred: ' + error.message); // Alert if there is an error
+      setLoading(false);
+      alert('An error occurred: ' + error.message);
     }
   };
 
   return (
-    <div className="mt-[35px] flex items-center gap-8">
-      <img 
-        className="w-[100%] sm:w-[400px] sm:h-[330px] md:w-[490px] md:h-[401px] lg:w-[600px] lg:h-[500px] object-cover" 
-        src={PhoneCart} 
-        alt="Description" 
-        style={{ flexShrink: 0 }} 
+    <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 mt-8 px-4 sm:px-8">
+      {/* Image Section */}
+      <img
+        className="w-full sm:w-[400px] md:w-[490px] lg:w-[600px] h-auto object-cover"
+        src={PhoneCart}
+        alt="Shopping"
+        style={{ flexShrink: 0 }}
       />
 
-      <div className="flex flex-col items-center text-center max-w-[400px] w-full mx-auto pr-6">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+      {/* Form Section */}
+      <div className="flex flex-col items-center text-center w-full max-w-[400px] mx-auto">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2">
           Log in to RealMarket
         </h1>
-        <p className="text-gray-600 text-sm md:text-base mb-6">
+        <p className="text-gray-600 text-sm sm:text-base mb-6">
           Please enter your details below
         </p>
 
@@ -79,14 +77,14 @@ const LoginPage = () => {
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-md mt-4 hover:bg-blue-700 transition duration-200"
-            disabled={loading} // Disable button if loading
+            className="w-full bg-blue-600 text-white py-2 sm:py-3 rounded-md mt-4 hover:bg-blue-700 transition duration-200"
+            disabled={loading}
           >
             {loading ? 'Loading...' : 'Log In'}
           </button>
         </form>
 
-        <p className="text-gray-600 text-sm md:text-base mt-4">
+        <p className="text-gray-600 text-sm sm:text-base mt-4">
           Don’t have an account?{' '}
           <a href="/signup" className="text-blue-600 hover:underline">
             Sign up
@@ -98,4 +96,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
