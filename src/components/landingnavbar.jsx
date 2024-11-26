@@ -18,9 +18,9 @@ const Landingnavbar = () => {
 
     // Navigate to appropriate page based on selected option
     if (selectedOption === 'signup') {
-      navigate('/signup'); // Route for Sign Up page
+      navigate('/login'); // Route for Sign Up page
     } else if (selectedOption === 'createAccount') {
-      navigate('/create-account'); // Route for Create Account page
+      navigate('/signup'); // Route for Create Account page
     }
   };
 
@@ -77,8 +77,9 @@ const Landingnavbar = () => {
               value={User}
               onChange={handleUserChange}
             >
-              <option value="signup">Sign Up</option>
-              <option value="createAccount">Create Account</option>
+              <option value="" disabled>User</option>
+              <option value="signup">Sign in</option>
+              <option value="createAccount">Sign up</option>
             </select>
           </div>
 

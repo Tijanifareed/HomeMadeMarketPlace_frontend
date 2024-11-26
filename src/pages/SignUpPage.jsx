@@ -1,7 +1,5 @@
-import PhoneCart from '../assets/PhoneCart.svg'
+import PhoneCart from '../assets/PhoneCart.svg';
 import React, { useState } from 'react';
-
-
 
 const SignUpPage = () => {
   const API_URL = process.env.REACT_APP_API_URL;
@@ -11,9 +9,7 @@ const SignUpPage = () => {
   const [phoneNumber, setPhoneNumber] = useState(''); // New phone number field
 
   const handleSubmit = async (e) => {
-   
     e.preventDefault();
-
     try {
       const response = await fetch(`${API_URL}/register`, {
         method: 'POST',
@@ -32,10 +28,9 @@ const SignUpPage = () => {
 
       if (response.ok) {
         alert('Sign-Up Successful');
-     //    sessionStorage.setItem('token', responseData.token); 
-        window.location.href = '/login'; // Redirect to the homepage
+        window.location.href = '/login'; // Redirect to the login page
       } else {
-          console.error(responseData);
+        console.error(responseData);
         alert('Error: ' + responseData.data);
       }
     } catch (error) {
@@ -45,16 +40,9 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="mt-[47px] flex items-center gap-8">
-      <img 
-        className="w-[100%] sm:w-[400px] sm:h-[330px] md:w-[490px] md:h-[401px] lg:w-[600px] lg:h-[500px] object-cover" 
-        src={PhoneCart}
-        alt="Description" 
-        style={{ flexShrink: 0 }}
-      />
-
-      <div className="flex flex-col items-center text-center max-w-[400px] w-full mx-auto pr-6">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+    <div className="mt-12 flex flex-col-reverse lg:flex-row items-center gap-8 px-4">
+      <div className="flex flex-col items-center text-center w-full max-w-md mx-auto">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-2">
           Sign Up for RealMarket
         </h1>
         <p className="text-gray-600 text-sm md:text-base mb-6">
@@ -90,15 +78,7 @@ const SignUpPage = () => {
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
-          {/* <select
-            className="w-full text-gray-800 placeholder-gray-500 p-2 border-b-2 border-gray-300 focus:border-blue-600 focus:outline-none mb-6"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value="" disabled>Select Role...</option>   
-            <option value="SELLER">Seller</option>
-            <option value="BUYER">Buyer</option>
-          </select> */}
+
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-md mt-4 hover:bg-blue-700 transition duration-200"
@@ -110,10 +90,16 @@ const SignUpPage = () => {
         <p className="text-gray-600 text-sm md:text-base mt-4">
           Already created an account?{' '}
           <a href="/login" className="text-blue-600 hover:underline">
-            Login 
+            Login
           </a>
         </p>
       </div>
+
+      <img
+        className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg object-cover"
+        src={PhoneCart}
+        alt="Phone Cart"
+      />
     </div>
   );
 };

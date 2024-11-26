@@ -62,7 +62,7 @@ const SellerApplicants = () => {
 
   useEffect(() => {
     fetchApplications();
-  }, []); // No dependencies for one-time fetch
+  }, []); 
 
   if (error) {
     return <p className="text-red-500 font-medium">Error: {error}</p>;
