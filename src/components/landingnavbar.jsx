@@ -39,79 +39,80 @@ const Landingnavbar = () => {
   };
 
   return (
-    <header className="fixed shadow-md top-10 w-full bg-white z-50">
-      <nav className="flex items-baseline p-3">
-        
-        <div className="text-xl font-bold text-right ml-20">
-          <img src="/logo.png" alt="RealMart Logo" className="h-10 w-auto mr-2" />
-          RealMart
+    <header className="fixed shadow-md w-full bg-white z-50">
+      {/* Top Section */}
+      <nav className="flex flex-col md:flex-row items-center justify-between p-3">
+        {/* RealMart Logo */}
+        <div className="text-xl font-bold text-right ml-5 md:ml-20">
+          <span className="text-blue-500">Real</span>Mart
         </div>
 
-    
-        <div className="flex items-center ml-10 gap-3 relative">
-          <form className="flex items-center">
-            <input
-              className="w-64 p-2 bg-gray-200 text-black placeholder-gray-500 rounded-3xl pl-9"
-              type="text"
-              placeholder="Search products..."
-            />
-            <div className="absolute left-2">
-              <FaSearch className="text-gray-500" />
-            </div>
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-3xl ml-2"
-            >
-              Search
-            </button>
-          </form>
-        </div>
-
-      
-        <ul className="flex space-x-4 ml-40">
-          <div className="flex items-center bg-blue-500 text-white px-4 py-2 rounded-3xl gap-2">
-            <TbUserCheck className="text-white text-sm" /> 
-            <select
-              className="bg-blue-500 text-white outline-none w-24 text-xs" 
-              id="User"
-              name="User"
-              value={User}
-              onChange={handleUserChange}
-            >
-              <option value="" disabled>User</option>
-              <option value="signup">Sign in</option>
-              <option value="createAccount">Sign up</option>
-            </select>
+        {/* Search Bar */}
+        <form className="flex items-center w-full md:w-auto">
+          <input
+            className="w-full md:w-64 p-2 bg-gray-200 text-black placeholder-gray-500 rounded-3xl pl-9"
+            type="text"
+            placeholder="Search products..."
+          />
+          <div className="absolute left-4">
+            <FaSearch className="text-gray-500" />
           </div>
-
-          <div className="flex items-center bg-blue-500 text-white px-4 py-2 rounded-3xl gap-2">
-            <GoQuestion className="text-white text-sm" /> 
-            <select
-              className="bg-blue-500 text-white outline-none w-24 text-xs" 
-              id="Help"
-              name="Help"
-              value={Help}
-              onChange={handleHelpChange}
-            >
-              <option value="" disabled>Help</option>
-              <option value="Helpcenter">Help center</option>
-              <option value="PlaceOrder">Place an Order</option>
-              <option value="sellerApplication">Apply to be a seller</option>
-              <option value="TrackOrder">Track an order</option>
-              <option value="cancelOrder">Cancel an order</option>
-              <option value="refund">Refunds and Refund</option>
-            </select>
-          </div>
-
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-3xl ml-2 flex"
+            className="hidden md:block bg-blue-500 text-white px-4 py-2 rounded-3xl ml-2"
           >
-            <GiShoppingCart className="text-gray-500 mr-2" />
-            Cart
+            Search
           </button>
-        </ul>
+        </form>
       </nav>
+
+      {/* Bottom Section for Mobile */}
+      <div className="flex md:hidden justify-between items-center fixed bottom-0 w-full bg-white p-3 shadow-md">
+        {/* User */}
+        <div className="flex items-center bg-blue-500 text-white px-3 py-2 rounded-3xl gap-2">
+          <TbUserCheck className="text-white text-sm" />
+          <select
+            className="bg-blue-500 text-white outline-none text-xs" // Reduced width and text size
+            id="User"
+            name="User"
+            value={User}
+            onChange={handleUserChange}
+          >
+            <option value="" disabled>User</option>
+            <option value="signup">Sign in</option>
+            <option value="createAccount">Sign up</option>
+          </select>
+        </div>
+
+        {/* Help */}
+        <div className="flex items-center bg-blue-500 text-white px-3 py-2 rounded-3xl gap-2">
+          <GoQuestion className="text-white text-sm" />
+          <select
+            className="bg-blue-500 text-white outline-none text-xs" // Reduced width and text size
+            id="Help"
+            name="Help"
+            value={Help}
+            onChange={handleHelpChange}
+          >
+            <option value="" disabled>Help</option>
+            <option value="Helpcenter">Help center</option>
+            <option value="PlaceOrder">Place an Order</option>
+            <option value="sellerApplication">Apply to be a seller</option>
+            <option value="TrackOrder">Track an order</option>
+            <option value="cancelOrder">Cancel an order</option>
+            <option value="refund">Refunds and Refund</option>
+          </select>
+        </div>
+
+        {/* Cart */}
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded-3xl ml-2 flex"
+        >
+          <GiShoppingCart className="text-white mr-2" />
+          Cart
+        </button>
+      </div>
     </header>
   );
 };
