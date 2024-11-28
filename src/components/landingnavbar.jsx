@@ -85,7 +85,7 @@ const Landingnavbar = () => {
         </div>
 
         {/* Help */}
-        <div className="flex items-center bg-blue-500 text-white px-3 py-2 rounded-3xl gap-2">
+        <div className="flex items-center bg-blue-500 text-white px-2 py-2 rounded-3xl gap-2"> {/* Reduced padding */}
           <GoQuestion className="text-white text-sm" />
           <select
             className="bg-blue-500 text-white outline-none text-xs" // Reduced width and text size
