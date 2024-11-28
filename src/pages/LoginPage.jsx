@@ -25,7 +25,7 @@ const LoginPage = () => {
 
       if (response.ok) {
         localStorage.setItem('token', responseData.data['token']);
-        alert('Login Successful');
+    
         if (responseData.data['role'] === 'ADMIN') {
           window.location.href = '/admin-dashboard';
         } else {
